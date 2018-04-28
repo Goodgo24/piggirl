@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.joe.dao.ExpressMapper" >
+  <resultMap id="BaseResultMap" type="com.joe.pojo.Express" >
+    <id column="express_id" property="expressId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="express_num" property="expressNum" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="INTEGER" />
+    <result column="other_contact" property="otherContact" jdbcType="VARCHAR" />
+    <result column="express_trail" property="expressTrail" jdbcType="VARCHAR" />
+    <result column="express_state" property="expressState" jdbcType="SMALLINT" />
+    <result column="express_company" property="expressCompany" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    express_id, order_id, express_num, address, name, tel, other_contact, express_trail, 
+    express_state, express_company
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.joe.pojo.ExpressExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from express
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="MySqlDialectSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from express
+    where express_id = #{expressId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from express
+    where express_id = #{expressId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.joe.pojo.ExpressExample" >
+    delete from express
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.joe.pojo.Express" >
+    insert into express (express_id, order_id, express_num, 
+      address, name, tel, 
+      other_contact, express_trail, express_state, 
+      express_company)
+    values (#{expressId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{expressNum,jdbcType=INTEGER}, 
+      #{address,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{tel,jdbcType=INTEGER}, 
+      #{otherContact,jdbcType=VARCHAR}, #{expressTrail,jdbcType=VARCHAR}, #{expressState,jdbcType=SMALLINT}, 
+      #{expressCompany,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.joe.pojo.Express" >
+    insert into express
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="expressId != null" >
+        express_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="expressNum != null" >
+        express_num,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="otherContact != null" >
+        other_contact,
+      </if>
+      <if test="expressTrail != null" >
+        express_trail,
+      </if>
+      <if test="expressState != null" >
+        express_state,
+      </if>
+      <if test="expressCompany != null" >
+        express_company,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="expressId != null" >
+        #{expressId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="expressNum != null" >
+        #{expressNum,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=INTEGER},
+      </if>
+      <if test="otherContact != null" >
+        #{otherContact,jdbcType=VARCHAR},
+      </if>
+      <if test="expressTrail != null" >
+        #{expressTrail,jdbcType=VARCHAR},
+      </if>
+      <if test="expressState != null" >
+        #{expressState,jdbcType=SMALLINT},
+      </if>
+      <if test="expressCompany != null" >
+        #{expressCompany,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.joe.pojo.ExpressExample" resultType="java.lang.Integer" >
+    select count(*) from express
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update express
+    <set >
+      <if test="record.expressId != null" >
+        express_id = #{record.expressId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.expressNum != null" >
+        express_num = #{record.expressNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=INTEGER},
+      </if>
+      <if test="record.otherContact != null" >
+        other_contact = #{record.otherContact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressTrail != null" >
+        express_trail = #{record.expressTrail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressState != null" >
+        express_state = #{record.expressState,jdbcType=SMALLINT},
+      </if>
+      <if test="record.expressCompany != null" >
+        express_company = #{record.expressCompany,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update express
+    set express_id = #{record.expressId,jdbcType=INTEGER},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      express_num = #{record.expressNum,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=INTEGER},
+      other_contact = #{record.otherContact,jdbcType=VARCHAR},
+      express_trail = #{record.expressTrail,jdbcType=VARCHAR},
+      express_state = #{record.expressState,jdbcType=SMALLINT},
+      express_company = #{record.expressCompany,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.joe.pojo.Express" >
+    update express
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="expressNum != null" >
+        express_num = #{expressNum,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=INTEGER},
+      </if>
+      <if test="otherContact != null" >
+        other_contact = #{otherContact,jdbcType=VARCHAR},
+      </if>
+      <if test="expressTrail != null" >
+        express_trail = #{expressTrail,jdbcType=VARCHAR},
+      </if>
+      <if test="expressState != null" >
+        express_state = #{expressState,jdbcType=SMALLINT},
+      </if>
+      <if test="expressCompany != null" >
+        express_company = #{expressCompany,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where express_id = #{expressId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.joe.pojo.Express" >
+    update express
+    set order_id = #{orderId,jdbcType=INTEGER},
+      express_num = #{expressNum,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=INTEGER},
+      other_contact = #{otherContact,jdbcType=VARCHAR},
+      express_trail = #{expressTrail,jdbcType=VARCHAR},
+      express_state = #{expressState,jdbcType=SMALLINT},
+      express_company = #{expressCompany,jdbcType=VARCHAR}
+    where express_id = #{expressId,jdbcType=INTEGER}
+  </update>
+  <sql id="MySqlDialectSuffix" >
+    <if test="page != null" >
+      <![CDATA[ limit #{page.begin}, #{page.length} ]]>
+    </if>
+  </sql>
+</mapper>

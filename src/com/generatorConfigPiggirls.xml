@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- 引入配置文件 -->
+	<!-- <properties resource="init.properties" /> -->
+	<!-- 数据库驱动 -->
+	<classPathEntry location="D:/javaWork/libs/mysql-connector-java-5.1.39.jar" />
+	<context id="context1" targetRuntime="MyBatis3">
+		<!-- Pagination -->
+		<plugin type="com.build.MySqlPaginationPlugin"></plugin>
+		<!-- 注释 -->
+		<commentGenerator>
+			<property name="suppressDate" value="true" /><!-- 是否取消注释 -->
+			<property name="suppressAllComments" value="true" /><!-- 是否去除自动生成的注释 
+				true：是 ： false:否 -->
+		</commentGenerator>
+		<!-- 数据库链接URL，用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:8728/piggirl" userId="joe" password="44303447" />
+		<!-- 类型转换 -->
+		<javaTypeResolver>
+			<!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+			<property name="forceBigDecimals" value="true" />
+		</javaTypeResolver>
+		<!-- 生成实体类地址 生成模型的包名和位置 -->
+		<javaModelGenerator targetPackage="com.joe.pojo" targetProject="Joanna">
+			<!-- 是否在当前路径下新加一层schema,eg：fase路径test.model， true:test.model.[schemaName] -->
+			<property name="enableSubPackages" value="false" />
+			<!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- 生成mapxml文件 生成映射文件的包名和位置 -->
+		<sqlMapGenerator targetPackage="com.joe.mapping" targetProject="Joanna">
+			<!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+		<!-- 生成mapxml对应client， DAO的包名和位置 -->
+		<javaClientGenerator targetPackage="com.joe.dao"
+			targetProject="Joanna" type="XMLMAPPER">
+			<!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+		
+		<table tableName="extra_pay"></table>
+		
+	</context>
+</generatorConfiguration>

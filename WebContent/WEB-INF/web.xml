@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>Archetype Created Web Application</display-name>
+ <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring-mybatis.xml</param-value>
+  </context-param>
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <async-supported>true</async-supported>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <!-- 判断页面的访问权限 -->
+  <filter>
+  	<filter-name>login</filter-name>
+  	<filter-class>com.joe.controller.fliter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+	<filter-name>login</filter-name>
+	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <listener>
+    <listener-class>com.common.MyContextLoaderListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+  </listener>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.js</url-pattern>
+    <url-pattern>*.html</url-pattern>
+    <url-pattern>*.jpg</url-pattern>
+    <url-pattern>*.png</url-pattern>
+    <url-pattern>*.gif</url-pattern>
+    <url-pattern>*.css</url-pattern>
+    <url-pattern>*.swf</url-pattern>
+    <url-pattern>*.3gp</url-pattern>
+    <url-pattern>*.mp4</url-pattern>
+    <url-pattern>*.mp3</url-pattern>
+    <url-pattern>*.apk</url-pattern>
+    <url-pattern>*.JPG</url-pattern>
+    <url-pattern>*.PNG</url-pattern>
+    <url-pattern>*.GIF</url-pattern>
+    <url-pattern>*.svg</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SpringMVC</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring-mvc.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+    <async-supported>true</async-supported>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SpringMVC</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+  	<welcome-file>/index.html</welcome-file>
+    <welcome-file>/index.html</welcome-file>
+  </welcome-file-list>
+  <session-config>
+    <session-timeout>600</session-timeout>
+  </session-config>
+
+ <!-- 403  禁止访问 -->
+ <error-page>
+  <error-code>403</error-code>
+  <location>/error/403.jsp</location>
+ </error-page> 
+ 
+ <!-- 404 未找到 访问的资源不存在 -->
+ <error-page>
+  <error-code>404</error-code>
+  <location>/error/404.jsp</location>
+ </error-page>
+ 
+ <error-page>
+  <error-code>405</error-code>
+  <location>/error/405.jsp</location>
+ </error-page>
+  
+ <!-- 500 内部服务器错误 -->
+ <error-page>
+  <error-code>500</error-code>
+  <location>/error/500.jsp</location>
+ </error-page>
+
+ <!-- 内部服务器错误 空指针异常 -->
+ <error-page>
+  <exception-type>java.lang.NullPointerException</exception-type>
+  <location>/error/nullPoint.jsp</location>
+ </error-page>
+
+ <!-- 内部服务器错误 顶层父类异常，捕获所有未配置的异常 -->
+ <!--
+ <error-page>
+  <exception-type>java.lang.Exception</exception-type>
+  <location>/error/error.jsp</location>
+ </error-page>
+  -->
+</web-app>

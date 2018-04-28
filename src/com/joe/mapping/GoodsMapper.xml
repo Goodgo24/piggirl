@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.joe.dao.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.joe.pojo.Goods" >
+    <id column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="DECIMAL" />
+    <result column="buy_address" property="buyAddress" jdbcType="VARCHAR" />
+    <result column="buy_time" property="buyTime" jdbcType="DATE" />
+    <result column="buy_people" property="buyPeople" jdbcType="INTEGER" />
+    <result column="buy_price" property="buyPrice" jdbcType="DECIMAL" />
+    <result column="sell_price" property="sellPrice" jdbcType="DECIMAL" />
+    <result column="profit" property="profit" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    goods_id, order_id, goods_name, number, buy_address, buy_time, buy_people, buy_price, 
+    sell_price, profit, create_time, create_user_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.joe.pojo.GoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="MySqlDialectSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goods
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.joe.pojo.GoodsExample" >
+    delete from goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.joe.pojo.Goods" >
+    insert into goods (goods_id, order_id, goods_name, 
+      number, buy_address, buy_time, 
+      buy_people, buy_price, sell_price, 
+      profit, create_time, create_user_id
+      )
+    values (#{goodsId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, 
+      #{number,jdbcType=DECIMAL}, #{buyAddress,jdbcType=VARCHAR}, #{buyTime,jdbcType=DATE}, 
+      #{buyPeople,jdbcType=INTEGER}, #{buyPrice,jdbcType=DECIMAL}, #{sellPrice,jdbcType=DECIMAL}, 
+      #{profit,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.joe.pojo.Goods" >
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="goodsName != null" >
+        goods_name,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="buyAddress != null" >
+        buy_address,
+      </if>
+      <if test="buyTime != null" >
+        buy_time,
+      </if>
+      <if test="buyPeople != null" >
+        buy_people,
+      </if>
+      <if test="buyPrice != null" >
+        buy_price,
+      </if>
+      <if test="sellPrice != null" >
+        sell_price,
+      </if>
+      <if test="profit != null" >
+        profit,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=DECIMAL},
+      </if>
+      <if test="buyAddress != null" >
+        #{buyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTime != null" >
+        #{buyTime,jdbcType=DATE},
+      </if>
+      <if test="buyPeople != null" >
+        #{buyPeople,jdbcType=INTEGER},
+      </if>
+      <if test="buyPrice != null" >
+        #{buyPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellPrice != null" >
+        #{sellPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="profit != null" >
+        #{profit,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.joe.pojo.GoodsExample" resultType="java.lang.Integer" >
+    select count(*) from goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update goods
+    <set >
+      <if test="record.goodsId != null" >
+        goods_id = #{record.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsName != null" >
+        goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buyAddress != null" >
+        buy_address = #{record.buyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyTime != null" >
+        buy_time = #{record.buyTime,jdbcType=DATE},
+      </if>
+      <if test="record.buyPeople != null" >
+        buy_people = #{record.buyPeople,jdbcType=INTEGER},
+      </if>
+      <if test="record.buyPrice != null" >
+        buy_price = #{record.buyPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sellPrice != null" >
+        sell_price = #{record.sellPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.profit != null" >
+        profit = #{record.profit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUserId != null" >
+        create_user_id = #{record.createUserId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update goods
+    set goods_id = #{record.goodsId,jdbcType=INTEGER},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=DECIMAL},
+      buy_address = #{record.buyAddress,jdbcType=VARCHAR},
+      buy_time = #{record.buyTime,jdbcType=DATE},
+      buy_people = #{record.buyPeople,jdbcType=INTEGER},
+      buy_price = #{record.buyPrice,jdbcType=DECIMAL},
+      sell_price = #{record.sellPrice,jdbcType=DECIMAL},
+      profit = #{record.profit,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_user_id = #{record.createUserId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.joe.pojo.Goods" >
+    update goods
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null" >
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=DECIMAL},
+      </if>
+      <if test="buyAddress != null" >
+        buy_address = #{buyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTime != null" >
+        buy_time = #{buyTime,jdbcType=DATE},
+      </if>
+      <if test="buyPeople != null" >
+        buy_people = #{buyPeople,jdbcType=INTEGER},
+      </if>
+      <if test="buyPrice != null" >
+        buy_price = #{buyPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellPrice != null" >
+        sell_price = #{sellPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="profit != null" >
+        profit = #{profit,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.joe.pojo.Goods" >
+    update goods
+    set order_id = #{orderId,jdbcType=INTEGER},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      number = #{number,jdbcType=DECIMAL},
+      buy_address = #{buyAddress,jdbcType=VARCHAR},
+      buy_time = #{buyTime,jdbcType=DATE},
+      buy_people = #{buyPeople,jdbcType=INTEGER},
+      buy_price = #{buyPrice,jdbcType=DECIMAL},
+      sell_price = #{sellPrice,jdbcType=DECIMAL},
+      profit = #{profit,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=INTEGER}
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </update>
+  <sql id="MySqlDialectSuffix" >
+    <if test="page != null" >
+      <![CDATA[ limit #{page.begin}, #{page.length} ]]>
+    </if>
+  </sql>
+</mapper>
