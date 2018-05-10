@@ -888,7 +888,7 @@ public final class DateUtil {
 	 * @throws ParseException 
 	 */
 	public static String showRefreshTime(Long time) throws ParseException{
-		initSDF();
+		//initSDF();
 		if(time != null){
 			Date date = SimpleDateFormat_yyyyMMddHHmm.parse(time+"");
 			return BdDateFormat_mm.format(date);
@@ -896,7 +896,7 @@ public final class DateUtil {
 		return null;
 	}
 	
-	private static void initSDF(){
+/*	private static void initSDF(){
 		if(BdDateFormat_dd == null){
 			SysConfigService ss =null;
 			try{
@@ -912,7 +912,7 @@ public final class DateUtil {
 			BdDateFormat_mm=new SimpleDateFormat(sdf+" HH:mm");
 			BdDateFormat_ss=new SimpleDateFormat(sdf+" HH:mm:ss");
 		}
-	}
+	}*/
 	/**
 	 * 是不是今天
 	 * @return

@@ -2,7 +2,6 @@ var _ctxPath="/Joanna";/*网站路径*/
 var _mediaPath="http://192.168.2.196:8080/Joanna";/*媒体路径*/
 //var _defaultRegionPath="2.3621.3635.";/*默认城市*/
 
-
 jQuery(function($){   
 
 

@@ -33,6 +33,7 @@
                 </when>
               </choose>
             </foreach>
+            and deleted = 0
           </trim>
         </if>
       </foreach>
@@ -62,6 +63,7 @@
                 </when>
               </choose>
             </foreach>
+            and deleted = 0
           </trim>
         </if>
       </foreach>
@@ -92,11 +94,11 @@
     where piggirl_user_id = #{piggirlUserId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from piggirl_user
+    update piggirl_user set deleted = 1
     where piggirl_user_id = #{piggirlUserId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.joe.pojo.PiggirlUserExample" >
-    delete from piggirl_user
+    update piggirl_user set deleted = 1
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>

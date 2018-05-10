@@ -134,7 +134,7 @@ public class FileUtilMy {
 	public String saveFileImg(MultipartFile attach,String markWatermark,boolean isAddWater){
 		if(realPath==null)
 			realPath = PropertiesConfigUtil.getInstance().getValue("front.media.dir");//获取绝对路径
-		initImgs();
+		//initImgs();
 		if(markWatermark==null) markWatermark=MarkWatermarkByWord;
 		if (!attach.isEmpty()) {// 判断文件是否为空
 //			File file = new File(realPath + X + attach.getOriginalFilename());
@@ -171,7 +171,7 @@ public class FileUtilMy {
 		}
 		return null;
 	}
-	private void initImgs(){
+	/*private void initImgs(){
 		if(MarkWatermarkByWord==null){
 			SysConfigService scs = (SysConfigService)ContextUtil.getBean("sysConfigService");
 			String vale[] = scs.getValue("productImgMidSize").split(",");
@@ -180,7 +180,7 @@ public class FileUtilMy {
 			heightS=Integer.parseInt(ss[0]);widthS=Integer.parseInt(ss[1]);
 			MarkWatermarkByWord=scs.getValue("MarkWatermarkByWord");
 		}
-	}
+	}*/
     /**
      * 删除单个文件 
      * @param   sPath    被删除文件的文件名 

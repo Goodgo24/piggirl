@@ -5,9 +5,6 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.dingdang.portal.pojo.SysUser;
-import com.dingdang.portal.service.SysConfigService;
-import com.dingdang.portal.service.SysUserService;
 
 
 /**
@@ -19,17 +16,17 @@ public class SecurityUtil {
 	private int pass=20;//该值可以根据时间  实时改变，以加大破解难道
 	private final long PassNoChange=103212765849137L;//该值不允许改变，改变将无法解密
 	private static SecurityUtil instance = new SecurityUtil();
-	private SysConfigService sysConfigService = null;
-	private SysUserService sysUserService = null;
+/*	private SysConfigService sysConfigService = null;
+	private SysUserService sysUserService = null;*/
 	public static SecurityUtil getInstance(){
 		instance.init();
 		return instance;
 	}
 	private void init(){
-		if(sysUserService==null){
+		/*if(sysUserService==null){
 			sysUserService = (SysUserService)ContextUtil.getBean("sysUserService");
 			sysConfigService=(SysConfigService)ContextUtil.getBean("sysConfigService");
-		}
+		}*/
 	}
 	/**
 	 * 简单加密
@@ -81,10 +78,10 @@ public class SecurityUtil {
 			String lsdfnmae = (String)session.getAttribute("lsdfnmae");
 			
 			Integer id = getUncId(Ksdafd8f);
-			SysUser user = sysUserService.selectByPrimaryKey(id);
-			if(user!=null&&user.getLoginName().equals(lsdfnmae)){
+		//	SysUser user = sysUserService.selectByPrimaryKey(id);
+			/*if(user!=null&&user.getLoginName().equals(lsdfnmae)){
 				return true;
-			}
+			}*/
 			return true;
 		}catch(Exception e){
 			e.printStackTrace();

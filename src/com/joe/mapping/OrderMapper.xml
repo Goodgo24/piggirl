@@ -38,6 +38,7 @@
                 </when>
               </choose>
             </foreach>
+            and deleted = 0
           </trim>
         </if>
       </foreach>
@@ -67,6 +68,7 @@
                 </when>
               </choose>
             </foreach>
+            and deleted = 0
           </trim>
         </if>
       </foreach>
@@ -98,11 +100,11 @@
     where order_id = #{orderId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from order
+    update order set deleted = 1
     where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.joe.pojo.OrderExample" >
-    delete from order
+     update order set deleted = 1
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
