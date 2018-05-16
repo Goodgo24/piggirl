@@ -43,28 +43,6 @@
 		<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}"></property>
 		<property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}"></property>
 	</bean>
-	<!-- activiti 用数据源 开始 -->
-	<!-- bean id="dataSource2" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-       <property name="driverClassName" value="${driver2}" />
-		<property name="url" value="${url2}" />
-		<property name="username" value="${username}" />
-		<property name="password" value="${password}" />
-		初始化连接大小
-		<property name="initialSize" value="${initialSize}"></property>
-		连接池最大数量
-		<property name="maxActive" value="${maxActive}"></property>
-		连接池最大空闲
-		<property name="maxIdle" value="${maxIdle}"></property>
-		连接池最小空闲
-		<property name="minIdle" value="${minIdle}"></property>
-		获取连接最大等待时间
-		<property name="maxWait" value="${maxWait}"></property>
-		<property name="removeAbandoned" value="${removeAbandoned}"></property>
-		<property name="removeAbandonedTimeout" value="${removeAbandonedTimeout}"></property>
-		<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}"></property>
-		<property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}"></property>
-    </bean> -->
-	<!-- activiti 用数据源 结束 -->
 	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -98,41 +76,7 @@
 		<aop:pointcut id="pc" expression="execution(public * com.joe.service.*.*(..))" />
 		<aop:advisor pointcut-ref="pc" advice-ref="txAdvice" /><!-- Aspect -->
 	</aop:config>
-	
-	<!-- actitviti配置文件开始 -->	
-	<!-- spring负责创建流程引擎的配置文件 -->
-<!--     <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
-           数据源
-        <property name="dataSource" ref="dataSource2" />
-        配置事务管理器，统一事务
-        <property name="transactionManager" ref="transactionManager" />
-        设置建表策略，如果没有表，自动创建表
-        <property name="databaseSchemaUpdate" value="true" />
-        是否启动jobExecutor 
-        <property name="jobExecutorActivate"value="false" />
-    </bean>
 
-    创建流程引擎对象
-    <bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
-        <property name="processEngineConfiguration" ref="processEngineConfiguration" />
-    </bean>
-
-    创建activiti提供的各种服务
-    工作流仓储服务
-    <bean id="repositoryService" factory-bean="processEngine" factory-method="getRepositoryService" />
-    工作流运行服务
-    <bean id="runtimeService" factory-bean="processEngine" factory-method="getRuntimeService" />
-    工作流任务服务
-    <bean id="taskService" factory-bean="processEngine" factory-method="getTaskService" />
-    工作流历史数据服务 
-    <bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService" />
-    工作流管理服务 
-    <bean id="managementService" factory-bean="processEngine" factory-method="getManagementService" />
-    <bean id="formService" factory-bean="processEngine" factory-method="getFormService" /> -->
-    <!-- 工作流唯一服务 -->
-    <!-- <bean id="IdentityService"factory-bean="processEngine"factory-method="getIdentityService"/> -->
-	
-	<!-- actitviti配置文件结束 -->
 	
 	<import resource="spring-scheduling.xml" />
 	<bean id="contextUtil" class="com.common.util.ContextUtil"/>
